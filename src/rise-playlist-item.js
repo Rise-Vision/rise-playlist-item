@@ -6,5 +6,8 @@ import { WebComponent } from 'web-component';
 })
 
 export default class RisePlaylistItem extends HTMLElement {
-
+  constructor() {
+    super();
+    console.log('RisePlaylistItem');
+  }
 }
