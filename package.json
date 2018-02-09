@@ -14,7 +14,7 @@
     "install": "mkdir -p node_modules/gadgets && curl --compressed \"http://rvashow2.appspot.com/gadgets/gadgets.min.js\" -o node_modules/gadgets/gadgets.min.js"
   },
   "dependencies": {
-    "common-component": "git+https://github.com/Rise-Vision/common-component.git#1.5.4"
+    "common-component": "git+https://github.com/Rise-Vision/common-component.git#feature/change-components-bucket"
   },
   "devDependencies": {
     "@webcomponents/webcomponentsjs": "^1.0.20",
