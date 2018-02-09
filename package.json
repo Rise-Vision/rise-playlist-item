@@ -8,9 +8,10 @@
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "unit": "jest --no-cache --config test/unit/jest.conf.js --coverage",
-    "test": "npm run unit",
+    "test": "npm run lint && npm run unit",
     "lint": "eslint --ext .js,.html src test/unit/specs test/e2e/specs",
-    "build": "node build/build.js"
+    "build": "npm run lint && node build/build.js",
+    "install": "mkdir -p node_modules/gadgets && curl --compressed \"http://rvashow2.appspot.com/gadgets/gadgets.min.js\" -o node_modules/gadgets/gadgets.min.js"
   },
   "dependencies": {},
   "devDependencies": {
@@ -54,6 +55,7 @@
     "ora": "^1.2.0",
     "portfinder": "^1.0.13",
     "rimraf": "^2.6.0",
+    "script-loader": "^0.7.2",
     "selenium-server": "^3.0.1",
     "uglifyjs-webpack-plugin": "^1.1.1",
     "unzipsfx-webpack-plugin": "git+https://github.com/Rise-Vision/unzipsfx-webpack-plugin.git",

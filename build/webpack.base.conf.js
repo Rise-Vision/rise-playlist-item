@@ -59,6 +59,11 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /\.js$/,
+        include: path.join(resolve("node_modules"), "gadgets"),
+        loader: 'script-loader'
       }
     ]
   },
