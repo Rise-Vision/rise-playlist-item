@@ -74,8 +74,8 @@ export default class RisePlaylistItem extends HTMLElement {
     this._dispatchEvent('stop');
   }
 
-  _dispatchEvent(name, details) {
-    const event = new CustomEvent(name, details);
+  _dispatchEvent(name, detail) {
+    const event = new CustomEvent(name, {detail});
 
     this.dispatchEvent(event);
   }
