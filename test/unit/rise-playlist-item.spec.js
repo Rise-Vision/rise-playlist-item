@@ -5,16 +5,24 @@ describe("Example test", () => {
   let component = null;
   const id = "test";
   beforeAll(() => {
+    const slot = {
+      addEventListener: jest.genMockFn()
+    }
     gadgets.Prefs.setInternal_("id", id);
     component = new RisePlaylistItem();
     component.shadowRoot = {};
     component.shadowRoot.appendChild = jest.genMockFn();
+    component.shadowRoot.querySelectorAll = jest.fn();
+    component.shadowRoot.querySelectorAll.mockReturnValue([slot]);
+
     component.connectedCallback();
 
     component._play = jest.genMockFn();
     component._pause = jest.genMockFn();
     component._stop = jest.genMockFn();
     component._configure = jest.genMockFn();
+    component._handleSlotChange = jest.genMockFn();
+
   });
 
   it("should have component defined", () => {
