@@ -29,8 +29,17 @@ export default class RisePlaylistItem extends HTMLElement {
       gadgets.rpc.register('rsparam_set_' + this.id, (names, values) => {
         this._configure(names, values);
       });
-      gadgets.rpc.call('', 'rsparam_get', null, this.id, [ 'companyId', 'displayId', 'additionalParams' ]);
+
+      // only makes the initial call to viewer if content has been add to the slot
+      this._handleSlotChange();
     }
+  }
+
+  _handleSlotChange() {
+    const slots = this.shadowRoot.querySelectorAll('slot');
+    slots[0].addEventListener('slotchange', () => {
+      gadgets.rpc.call('', 'rsparam_get', null, this.id, [ 'companyId', 'displayId', 'additionalParams' ]);
+    });
   }
 
   _configure(names, values) {
