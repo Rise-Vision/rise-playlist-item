@@ -17,6 +17,8 @@ export default class RisePlaylistItem extends HTMLElement {
 
   connectedCallback() {
     if (this.id && this.id !== '') {
+      console.log('connectedCallback');
+
       gadgets.rpc.register('rscmd_play_' + this.id, () => {
         this._play();
       });
@@ -29,20 +31,11 @@ export default class RisePlaylistItem extends HTMLElement {
       gadgets.rpc.register('rsparam_set_' + this.id, (names, values) => {
         this._configure(names, values);
       });
-
-      // only makes the initial call to viewer if content has been add to the slot
-      this._handleSlotChange();
     }
   }
 
-  _handleSlotChange() {
-    const slots = this.shadowRoot.querySelectorAll('slot');
-    slots[0].addEventListener('slotchange', () => {
-      gadgets.rpc.call('', 'rsparam_get', null, this.id, [ 'companyId', 'displayId', 'additionalParams' ]);
-    });
-  }
-
   _configure(names, values) {
+    console.log('_configure');
     let additionalParams;
     let companyId = '';
     let displayId = '';
@@ -96,5 +89,9 @@ export default class RisePlaylistItem extends HTMLElement {
 
   callDone() {
     gadgets.rpc.call('', 'rsevent_done', null, this.id);
+  }
+
+  callRSParamGet() {
+    gadgets.rpc.call('', 'rsparam_get', null, this.id, [ 'companyId', 'displayId', 'additionalParams' ]);
   }
 }

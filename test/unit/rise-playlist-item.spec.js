@@ -10,9 +10,7 @@ describe("RisePlaylistItem", () => {
     component = new RisePlaylistItem();
     component.shadowRoot = {};
     component.shadowRoot.appendChild = jest.genMockFn();
-    component.shadowRoot.querySelectorAll = jest.genMockFn();
 
-    component._handleSlotChange = jest.genMockFn();
     component.connectedCallback();
 
     component._play = jest.genMockFn();
@@ -25,15 +23,6 @@ describe("RisePlaylistItem", () => {
   it("should have component defined", () => {
     expect(RisePlaylistItem).toBeDefined();
     expect(component).toBeDefined();
-  });
-
-  it("should add listener for slotchange", (done) => {
-    jest.useFakeTimers();
-    setTimeout(()=>{
-      expect(component._handleSlotChange).toHaveBeenCalled();
-      done();
-    }, 1000);
-    jest.runAllTimers();
   });
 
   it("should call configure", (done) => {
@@ -120,32 +109,6 @@ describe("RisePlaylistItem", () => {
     }, 1000);
 
     jest.runAllTimers();
-  });
-
-  describe("RisePlaylistItem slotchange", () => {
-    const slot = {
-      addEventListener: jest.genMockFn()
-    };
-    beforeAll(() => {
-
-      gadgets.Prefs.setInternal_("id", id);
-      component = new RisePlaylistItem();
-      component.shadowRoot = {};
-      component.shadowRoot.appendChild = jest.genMockFn();
-      component.shadowRoot.querySelectorAll = jest.fn().mockReturnValue([slot]);
-
-    });
-
-    it("should add slotchange event listener", (done) => {
-      jest.useFakeTimers();
-      component._handleSlotChange();
-      setTimeout(()=>{
-        expect(component.shadowRoot.querySelectorAll).toHaveBeenCalledWith("slot");
-        expect(slot.addEventListener).toHaveBeenCalledWith("slotchange", expect.any(Function));
-        done();
-      }, 1000);
-      jest.runAllTimers();
-    });
   });
 
 });
