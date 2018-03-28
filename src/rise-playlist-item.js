@@ -39,6 +39,9 @@ export default class RisePlaylistItem extends HTMLElement {
     let additionalParams;
     let companyId = '';
     let displayId = '';
+    let pref = new gadgets.Prefs();
+    let width = pref.getInt('rsW');
+    let height = pref.getInt('rsH');
 
     if (Array.isArray(names) && names.length > 0 && Array.isArray(values) && values.length > 0) {
       // company id
@@ -60,7 +63,8 @@ export default class RisePlaylistItem extends HTMLElement {
         additionalParams = JSON.parse(values[2]);
       }
 
-      this._dispatchEvent('configure', Object.assign({}, {companyId, displayId}, additionalParams));
+      this._dispatchEvent('configure', Object.assign({}, {companyId, displayId, width, height},
+        additionalParams));
     }
   }
 
